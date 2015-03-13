@@ -282,7 +282,7 @@ static MLAutoReplace *sharedPlugin;
 
 #pragma mark - check and replace
 - (BOOL)checkAndReplaceGetterWithCurrentLine:(NSString*)currentLine  ofTextView:(NSTextView*)textView
-{
+{NSLog(@"--%@",currentLine);
     //eg:- (UIView *)view///
     static NSString *lastCurrentLine = nil;
     if(![currentLine vv_matchesPatternRegexPattern:@"^\\s*-\\s*\\(\\s*\\w+\\s*\\*?\\s*\\)\\s*\\w+\\s*/{3}$"]){
@@ -297,7 +297,7 @@ static MLAutoReplace *sharedPlugin;
     }
     lastCurrentLine = currentLine;
     
-    
+
     //get the return type of getter
     NSArray *array = [currentLine vv_stringsByExtractingGroupsUsingRegexPattern:@"\\(\\s*(\\w+\\s*\\*?)\\s*\\)"];
     if (array.count<=0) {
@@ -393,12 +393,20 @@ static MLAutoReplace *sharedPlugin;
         if ([NSString IsNilOrEmpty:regex]||[NSString IsNilOrEmpty:replaceContent]) {
             continue;
         }
-        
+
         //检测是否匹配
         if(![currentLine vv_matchesPatternRegexPattern:regex]){
             continue;
         }
-        //按键以完成替换
+        
+//2015-03-13 16:01 - 尹现伟
+        //增加个添加时间标记的功能 
+        if ([regex isEqualToString:@"^\\s*--tag$"]) {
+           
+            replaceContent = [NSString stringWithFormat:@"//%@ - %@",[self stringFromDate:[NSDate date]], replaceContent];
+        }
+        
+        //完成替换
         [self removeCurrentLineContentAndInputContent:replaceContent ofTextView:textView];
         return YES;
         
@@ -407,6 +415,16 @@ static MLAutoReplace *sharedPlugin;
     return NO;
     
 }
+
+- (NSString *)stringFromDate:(NSDate *)date{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    return destDateString;
+}
+
 
 
 #pragma mark - auto input content and remove orig conten of current line
