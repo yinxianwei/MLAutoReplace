@@ -98,5 +98,11 @@
 		<key>replaceContent</key>
 		<string>typedef &lt;#returnType#&gt;(^&lt;#name#&gt;)(&lt;#arguments#&gt;);</string>
 	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*--tag$</string>
+		<key>replaceContent</key>
+		<string>尹现伟</string>
+	</dict>
 </array>
 </plist>
