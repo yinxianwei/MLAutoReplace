@@ -104,5 +104,36 @@
 		<key>replaceContent</key>
 		<string>尹现伟</string>
 	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*--tab$</string>
+		<key>replaceContent</key>
+		<string>    // MARK: - UITableViewDataSource
+    func numberOfSectionsInTableView(tableView: UITableView) -&gt; Int {
+        
+        return 1;
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -&gt; Int {
+        
+        return 0;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -&gt; UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(&quot;Cell&quot;, forIndexPath: indexPath) as! UITableViewCell;
+        
+        
+        return cell;
+    }
+    
+    // MARK: - UITableViewDelegate
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true);
+        
+        
+    }
+</string>
+	</dict>
 </array>
 </plist>
