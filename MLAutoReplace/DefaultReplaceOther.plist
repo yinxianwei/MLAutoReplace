@@ -135,5 +135,23 @@
     }
 </string>
 	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*==mr$</string>
+		<key>replaceContent</key>
+		<string>//MARK: - </string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*==fm$</string>
+		<key>replaceContent</key>
+		<string>//FIXME: </string>
+	</dict>
+	<dict>
+		<key>regex</key>
+		<string>^\s*==td$</string>
+		<key>replaceContent</key>
+		<string>//TODO: </string>
+	</dict>
 </array>
 </plist>
